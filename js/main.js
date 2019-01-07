@@ -2,110 +2,123 @@ const questionElement = document.getElementsByTagName("H3")[0];
 const answersList = document.getElementsByClassName("quiz__answers--list")[0];
 const answerItems = document.getElementsByClassName("quiz__answers--item");
 const quiz = document.getElementsByClassName("quiz")[0];
-const counter = document.getElementsByTagName("H4")[0];
+const counter = document.getElementsByTagName("h4")[0];
+const quizHeader = document.getElementsByClassName("quiz__header")[0];
 let count = 0;
 let rightAnswers = 0;
 let wrongAnswers = 0;
-let bool = false;
+let quizEnded = false;
 
 
 const questions = [
-    "What do Joe Thiesman and Alex Smith have in common??",
-    "In what year did Cam Newton win NFL MVP??",
-    "How many super bowls has Tom Brady won? And how many has he been to in total??",
-    "Which team in the NFL moved from San Diego to Los Angeles??",
+    "What team appeared in 4 consecutive Super Bowls from 1991-1994?",
+    "Which QB has the most Super Bowl interceptions?",
+    "Who holds the single season touchdown receptions record with 23?",
+    "Which NFL team moved from San Diego to Los Angeles??",
     "What NFL Team has the most super bowls??",
-    "Which NFL team only sports a logo on one side of the helmet??",
+    "Which NFL team only sports a logo on one side of their helmet??",
     "Emmitt Smith is the NFL's all time leading rusher, who's second??",
-    "Which team won the first ever super bowl??",
-    "The helmet catch is one of the greatest moments in super bowl history, which two teams participated in this super bowl??",
-    "Only one team in NFL history ever went undefeated in the regular season and went on to win the super bowl, which team was it??"
+    "Aaron Rodgers currently has the highest career passer rating (Min. 1,500 attempts) at 106.0. Who is second?",
+    "Chad Ochocinco's real name is _____",
+    "How many teams are there in the NFL?",
+    "How many roster spots does each NFL team have??",
+    "How many rings does Tom Brady have?",
+    "Which team is the only team to go undeated and win the super bowl?",
+    "Which NFL QB has the most career rushing touchdowns?",
+    "Who was the last non-quarterback to win NFL MVP?"
 ];
 
 const answers = [
-    ["They both broke their leg", "They both wear the number 11", "They both played for the Oakland Radiers"],
-    ["2015", "2017", "2013"],
-    ["Won 5 and been to 7", "Won 3 and been to 5", "Won 5 and been to 8"],
-    ["The Rams", "The Raiders", "The Chargers"],
-    ["Dallas Cowboys", "New England Patriots", "Pitsburgh Steelers"],
-    ["Cleveland Browns", "Pitsburgh Steelers", "Carolina Panthers"],
-    ["Adrian Peterson", "Barry Sanders", "Walter Peyton"],
-    ["Dallas Cowboys", "Green Bay Packers", "Chicago Bears"],
-    ["New England Patriots and Seattle Seahawks", "Pitsburgh Steelers and Arizona Cardinals", "New York Giants and New England Patriots"],
-    ["New England Patriots", "Miami Dolphins", "Cleveland Browns"]
+    ["Denver Broncos", "Cleveland Browns", "Dallas Cowboys", "Buffalo Bills"],
+    ["Eli Manning", "Tom Brady", "John Elway", "Troy Aikman"],
+    ["Terrell Owens", "Jerry Rice", "Randy Moss", "Antonio Brown"],
+    ["The Rams", "The Raiders", "The Chargers", "The Chiefs"],
+    ["Dallas Cowboys", "New England Patriots", "Pitsburgh Steelers", "Green Bay Packers"],
+    ["Cleveland Browns", "Pitsburgh Steelers", "Carolina Panthers", "Baltimore Ravens"],
+    ["Adrian Peterson", "Barry Sanders", "Walter Peyton", "Jim Brown"],
+    ["Tony Romo", "Steve Young", "Tom Brady", "Peyton Manning"],
+    ["Jayvon Johhson", "Chad Johnson", "Jamir Johnson", "Jake Johnson"],
+    ["28", "36", "30", "32"],
+    ["50", "44", "53", "60"],
+    ["2", "4", "5", "6"],
+    ["New England Patriots", "Green Bay Packers", "Miami Dolphins", "Dallas Cowboys"],
+    ["Michael Vick", "Steve Young", "Cam Newton", "Tom Brady"],
+    ["Ray Lewis", "Lawrence Taylor", "Adrian Peterson", "Calvin Johnson"]
 ];
 
 const correctAnswers = [
-    "They both broke their leg",
-    "2015",
-    "Won 5 and been to 8",
+    "Buffalo Bills",
+    "John Elway",
+    "Randy Moss",
     "The Chargers",
     "Pitsburgh Steelers",
     "Pitsburgh Steelers",
-    "Barry Sanders",
-    "Green Bay Packers",
-    "New York Giants and New England Patriots",
-    "Miami Dolphins"
+    "Walter Peyton",
+    "Tony Romo",
+    "Chad Johnson",
+    "32",
+    "53",
+    "5",
+    "Miami Dolphins",
+    "Cam Newton",
+    "Adrian Peterson"
 ];
 
-
+// Rendering DOM Function
 const renderQuiz = () => {
     questionElement.innerHTML = questions[count];
     counter.innerHTML = `${count + 1}/${questions.length}`;
-    for( let i = 0; i < 3; i++ ) {
+    for( let i = 0; i < 4; i++ ) {
         answerItems[i].innerHTML = answers[count][i];
     }
 }
 
+// Initializing Quiz
 renderQuiz();
 
+// Adding Quiz Functionality
 answersList.addEventListener("click", (evt) => {
-    if( count > 8 ) {
-       if( rightAnswers > 5 ) {
-          counter.style.display = "none";
-          answersList.style.display = "none";
-          questionElement.innerHTML = `You got ${rightAnswers} correct, good job!`;
-        } else if( rightAnswers < 5 ) {
-          counter.style.display = "none";
-          answersList.style.display = "none";
-          questionElement.innerHTML = `You got ${rightAnswers} correct, you can do better!`; 
-        }
-        bool = true;
-        if( bool ) {
-            const btn = document.createElement("BUTTON");
-            btn.innerHTML = "Retry";
-            quiz.appendChild(btn);
-            btn.addEventListener("click", () => {
-                location.reload();
-            });
-        }
-    }
-    if( evt.target.tagName = "LI" ) {
+    if( evt.target.tagName === "LI" ) {
         if( evt.target.innerHTML === correctAnswers[count] ) {
             rightAnswers += 1;
         } else {
             wrongAnswers += 1;
         }
-        count += 1;
-      }
-    if( count < 10 ) { 
-        renderQuiz();
-    } 
+    }
+    
+    // Adding Post Quiz Results Functionality 
+    if(count >= 14) {
+        counter.style.display = "none";
+        questionElement.style.display = "none";
+        answersList.style.display = "none";
+        quizEnded = true;
+    }
+
+    // Creating and appending reset button if quiz has ended
+    if(quizEnded) {
+        const btn = document.createElement("BUTTON");
+        const h5 = document.createElement("H5");
+        btn.innerHTML = "Retake Quiz";
+        if( rightAnswers === 15 ) {
+            h5.innerHTML = `You got all ${rightAnswers} answers right, perfect!`;
+        } else if( rightAnswers > 10 ) {
+            h5.innerHTML = `You got ${rightAnswers} answers right, good job!`;
+        } else if( rightAnswers > 5 ) {
+            h5.innerHTML = `You got ${rightAnswers} answers right, not bad.`;
+        } else if( rightAnswers > 0 ) {
+            h5.innerHTML = `You got ${rightAnswers} answers right, you can do better!`;
+        } else if( rightAnswers === 0 ) {
+            h5.innerHTML = `Wow, you didn't get one answer right..`;
+        }
+        quizHeader.appendChild(h5);
+        quizHeader.appendChild(btn);
+
+        // Adding button functionality to retake quiz
+        btn.addEventListener("click", () => {
+            location.reload();
+        });
+    }
+
+    count += 1;
+    renderQuiz();
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

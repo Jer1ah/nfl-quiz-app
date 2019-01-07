@@ -1,89 +1,97 @@
 html, body {
     margin: 0;
     padding: 0;
-    background: #4076ce;
     font-family: 'Noto Sans TC', sans-serif;
+    background-color: #E1EFFF;
+    font-size: 10px;
 }
 
 h1 {
     text-align: center;
-    color: white;
-    margin-top: 100px;
+    margin-top: 15.5rem;
+    font-size: 4rem;
+    color: #245D9E;
+}
+
+h4 {
+    font-size: 2.2rem !important;
+    margin: 1.5rem auto 0;
+    color: #245D9E;
+}
+
+h3 {
     font-size: 3rem;
+    margin-top: .5rem;
 }
 
-
-.quiz {
-    width: 40rem;
-    margin: 5rem auto 0;
-    background-color: #22509b;
-    height: 35rem;
-    border: 1px solid black;
-    padding: 1rem;
-    text-align-last: center;
-}
-
-.quiz__counter {
-    color: white;
-    font-size: 1.4rem;
-    display: inline-block;
-    margin-left: 1.3rem;
-    margin-bottom: 0;
-}
-
-.quiz__question {
+.quiz__header {
+    display: block;
     text-align: center;
+    width: 75rem;
+    height: 17rem;
+    background-color: #4F91DE;
+    margin: 2rem auto 0;
     color: white;
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
-    margin-top: 0;
+    padding: .1rem 0;
+    border: .3rem solid #245D9E;
+    border-radius: .5rem;
 }
 
 .quiz__answers {
-    margin: auto;
+    width: 75rem;
+    margin: 5rem auto;
 }
 
 .quiz__answers--list {
     padding: 0;
+    width: 75rem;
     list-style: none;
-    color: white;
-    text-align-last: center;
-    width: 35rem;
-    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0;
 }
 
-
 .quiz__answers--item {
-    width: 100%;
-    margin: .8rem auto .8rem;
-    background-color: #4076ce;
-    height: 3.9rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.3rem;
-    border: 1px solid black;
+    width: 49%;
     text-align: center;
+    background: #4F91DE;
+    margin: 1rem 0;
+    padding: 2rem 0;
+    font-size: 2.2rem;
+    color: white;
+    border: .3rem solid #245D9E;
+    border-radius: .5rem;
+    transition: all .3s;
 }
 
 .quiz__answers--item:hover {
     cursor: pointer;
+    background: #245D9E;
 }
 
 button {
-    height: 5rem;
-    width: 19rem; 
-    font-size: 1.5rem;
+    padding: 1.3rem 4.5rem;
+    border: none;
+    background-color: #245D9E;
     color: white;
-    background-color: #4076ce;
-    border: black solid 1px;
-    display: inline-block;
-    margin-top: 2.5rem;
+    border-radius: .3rem;
+    font-size: 1.7rem;
+    font-weight: bold;
 }
 
 button:hover {
     cursor: pointer;
 }
+
+h5 {
+    font-size: 3rem;
+    margin: 2rem auto 3rem;
+}
+
+
+
 
 
 
